@@ -1,0 +1,28 @@
+{
+  "name": "mmorpg_got",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexandrejonathas/mmorpg_got.git"
+  },
+  "author": "Jonathas A. B. de Lima",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alexandrejonathas/mmorpg_got/issues"
+  },
+  "homepage": "https://github.com/alexandrejonathas/mmorpg_got#readme",
+  "dependencies": {
+    "body-parser": "^1.16.0",
+    "consign": "^0.1.2",
+    "ejs": "^2.5.5",
+    "express": "^4.14.1",
+    "express-session": "^1.15.1",
+    "express-validator": "^3.1.2",
+    "mongodb": "^2.2.23"
+  }
+}
