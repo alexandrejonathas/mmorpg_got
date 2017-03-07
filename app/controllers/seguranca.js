@@ -5,8 +5,6 @@ module.exports.autenticar = function(application, req, res){
   req.assert('login', 'O login é obrigatório!').notEmpty();
   req.assert('senha', 'A senha é obrigatória!').notEmpty();
 
-  console.log(dados);
-
   var errors = req.validationErrors();
 
   if(errors){
@@ -15,9 +13,9 @@ module.exports.autenticar = function(application, req, res){
   }
 
   var conn = application.config.dbConnection;
-  var UsuariosDAO = application.app.models.UsuariosDAO(conn);
+  var UsuariosDAO = new application.app.models.UsuariosDAO(conn);
 
-  
+  UsuariosDAO.autenticar(dados);
 
   res.send("Logou");
 };
