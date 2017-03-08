@@ -11,12 +11,20 @@ UsuariosDAO.prototype.inserirUsuario = function(usuario){
   });
 };
 
-UsuariosDAO.prototype.autenticar = function(usuario){
+UsuariosDAO.prototype.autenticar = function(usuario, req, res){
   this._conn.open(function(error, mongoclient){
-
     mongoclient.collection('usuarios', function(error, collection){
         collection.find(usuario).toArray(function(error, result){
-          console.log(result);
+          if(result[0] != undefined){
+            req.session.autorizado = true;
+            req.session.login = result[0].login;
+            req.session.casa = result[0].casa;
+          }
+          if(req.session.autorizado){
+            res.redirect("jogo");
+          }else{
+            res.render("index", {usuario: usuario, errors: {}});
+          }
         });
         mongoclient.close();
     });
