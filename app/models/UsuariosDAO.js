@@ -2,11 +2,12 @@ function UsuariosDAO(conn){
   this._conn = conn();
 };
 
-UsuariosDAO.prototype.inserirUsuario = function(usuario){
+UsuariosDAO.prototype.inserirUsuario = function(usuario, req, res){
   this._conn.open(function(error, mongoclient){
     mongoclient.collection('usuarios', function(error, collection){
       collection.insert(usuario);
       mongoclient.close();
+      res.render('index', {usuario: {}, errors: {}});
     });
   });
 };
