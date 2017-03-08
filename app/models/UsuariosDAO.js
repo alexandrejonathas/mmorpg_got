@@ -6,7 +6,7 @@ UsuariosDAO.prototype.inserirUsuario = function(usuario){
   this._conn.open(function(error, mongoclient){
     mongoclient.collection('usuarios', function(error, collection){
       collection.insert(usuario);
-      collection.close();
+      mongoclient.close();
     });
   });
 };
@@ -18,7 +18,7 @@ UsuariosDAO.prototype.autenticar = function(usuario){
         collection.find(usuario).toArray(function(error, result){
           console.log(result);
         });
-        collection.close();
+        mongoclient.close();
     });
 
   });
