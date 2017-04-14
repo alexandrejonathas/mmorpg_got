@@ -10,13 +10,13 @@ module.exports.jogo = function(application, req, res){
   var conn = application.config.dbConnection;
   var JogoDAO = new application.app.models.JogoDAO(conn);
 
-  var comando_invalido = "N";
+  var msg = "";
 
-  if(req.query.comando_invalido == "S"){
-    comando_invalido = "S";
+  if(req.query.msg != ""){
+    msg = req.query.msg;
   }
 
-  JogoDAO.iniciaJogo(req, res, usuario, casa, comando_invalido);
+  JogoDAO.iniciaJogo(req, res, usuario, casa, msg);
 };
 
 module.exports.sair = function(application, req, res){
@@ -49,11 +49,15 @@ module.exports.ordenar_sudito = function(application, req, res){
   var errors = req.validationErrors();
 
   if(errors){
-    res.redirect("jogo?comando_invalido=S");
+    res.redirect("jogo?msg=A");
     return;
   }
 
-  res.send("Tudo ok");
+  var connection = application.config.dbConnection;
+  var JogoDAO = new application.app.models.JogoDAO(connection);
+
+  dados.usuario = req.session.login;
+  JogoDAO.acao(req, res, dados);
 
 };
 
