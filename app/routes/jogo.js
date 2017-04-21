@@ -19,4 +19,8 @@ module.exports = function(application){
     application.app.controllers.jogo.ordenar_sudito(application, req, res);
   });
 
+  application.get("/revogar-acao", function(req, res){
+    application.app.controllers.jogo.revogar_acao(application, req, res);
+  });
+
 };

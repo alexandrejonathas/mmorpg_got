@@ -7,6 +7,8 @@ module.exports.autenticar = function(application, req, res){
 
   var errors = req.validationErrors();
 
+  console.log(errors);
+
   if(errors){
     res.render('index', {usuario: dados, errors: errors});
     return;

@@ -58,7 +58,7 @@ module.exports.ordenar_sudito = function(application, req, res){
 
   dados.usuario = req.session.login;
   JogoDAO.acao(req, res, dados);
-
+  res.redirect("/jogo?msg=B");
 };
 
 module.exports.pergaminhos = function(application, req, res){
@@ -66,6 +66,19 @@ module.exports.pergaminhos = function(application, req, res){
     res.render("index", {usuario: {}, errors: {}});
     return;
   }
+  var connection = application.config.dbConnection;
+  var JogoDAO = new application.app.models.JogoDAO(connection);
+  var usuario = req.session.login;
 
-  res.render("pergaminhos", {errors: {}});
+  JogoDAO.getAcoes(req, res, usuario);
+
+};
+
+module.exports.revogar_acao = function(application, req, res){
+  var url_query = req.query;
+
+  var connection = application.config.dbConnection;
+  var JogoDAO = new application.app.models.JogoDAO(connection);
+
+  JogoDAO.revogarAcao(req, res, url_query.id);
 };
